@@ -1,0 +1,35 @@
+{
+	"manifest_version": 2,
+
+	"author": "Andrew Rochman",
+	"name": "Chromesplosion",
+	"description": "Blows up web pages",
+	"version": "0.1",
+	"homepage_url": "https://github.com/thomasfinch/chromesplosion",
+	"deafault_locale": "en",
+
+	"icons": {
+		"16": "icon/icon16.png",
+		"48": "icon/icon48.png",
+		"128": "icon/icon128.png"
+	},
+
+	"browser_action": {
+		"default_icon": {
+			"19": "icon/icon19.png",
+			"38": "icon/icon38.png"
+		},
+		"default_title": "Chromesplosion",
+	},
+
+	"incognito": "split",
+	"offline_enabled": true,
+
+	"permissions": [
+		"<all_urls>",
+		"activeTab",
+		"contentSettings",
+		"contextMenus",
+		"storage"
+	]
+}

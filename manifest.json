@@ -18,6 +18,7 @@
 			"19": "icon/icon19.png",
 			"38": "icon/icon38.png"
 		},
+        "default_popup": "run.html",
 		"default_title": "Chromesplosion"
 	},
 

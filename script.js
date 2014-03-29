@@ -1,6 +1,7 @@
 var elements = new Array(); //Array of all DOM elements that can be physics-ed
 var bodies = new Array(); //Array for all physical bodies on the web page
 var world; //Box2D world
+var worldAABB;
 
 init();
 
@@ -8,6 +9,23 @@ function init()
 {
 	console.log('init');
 	document.addEventListener('mousedown', mouseClicked, false);
+
+	//Create world
+	worldAABB = new b2AABB();
+	worldAABB.minVertex.Set( - 200, - 200 );
+	worldAABB.maxVertex.Set( window.innerWidth + 200, window.innerHeight + 200 );
+	world = new b2World(worldAABB, new b2Vec2(0, -10), true);
+
+	//Create test object
+	var circleSd = new b2CircleDef();
+	circleSd.density = 1.0;
+	circleSd.radius = 20;
+	circleSd.restitution = 1.0;
+	circleSd.friction = 0;
+	var circleBd = new b2BodyDef();
+	circleBd.AddShape(circleSd);
+	circleBd.position.Set(0,0);
+	var circleBody = world.CreateBody(circleBd);
 }
 
 //Gets all DOM elements that will be operated on by the physics

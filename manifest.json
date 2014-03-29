@@ -6,7 +6,6 @@
 	"description": "Blows up web pages",
 	"version": "0.1",
 	"homepage_url": "https://github.com/thomasfinch/chromesplosion",
-	"deafault_locale": "en",
 
 	"icons": {
 		"16": "icon/icon16.png",
@@ -19,7 +18,7 @@
 			"19": "icon/icon19.png",
 			"38": "icon/icon38.png"
 		},
-		"default_title": "Chromesplosion",
+		"default_title": "Chromesplosion"
 	},
 
 	"incognito": "split",

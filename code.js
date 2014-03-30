@@ -54,6 +54,7 @@ if ( location.search != "" ) {
 
 function init() {
 
+    /*
 	gWebSearch = new google.search.WebSearch();
 	gWebSearch.setResultSetSize( google.search.Search.SMALL_RESULTSET );
 	gWebSearch.setSearchCompleteCallback( null, onWebSearch );
@@ -61,6 +62,7 @@ function init() {
 	gImageSearch = new google.search.ImageSearch();
 	gImageSearch.setResultSetSize( google.search.Search.SMALL_RESULTSET );
 	gImageSearch.setSearchCompleteCallback( null, onImageSearch );
+    */
 
 	document.addEventListener( 'mousedown', onDocumentMouseDown, false );
 	document.addEventListener( 'mouseup', onDocumentMouseUp, false );
@@ -89,7 +91,7 @@ function init() {
 	// Get box2d elements
 	// elements = getElementsByClass("box2d");
 
-	var tagsToGet = ['h1']; //List of tags to get elements for (physics applied to them)
+	var tagsToGet = ['div']; //List of tags to get elements for (physics applied to them)
 	for (var i = 0; i < tagsToGet.length; i++)
 	{
 		var eltsOfTag = document.getElementsByTagName(tagsToGet[i]);

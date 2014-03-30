@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function(){
 var stat = false;
 
 function toggle(tab){
-    alert(stat);
     if (!stat){
         chrome.browserAction.setIcon({"path" : chrome.extension.getURL("icon/icon38.png")});
         chrome.tabs.executeScript(null, {file: "script.js"});

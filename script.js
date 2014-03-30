@@ -1281,7 +1281,6 @@ if ( location.search != "" ) {
 //
 
 function init() {
-    alert("hi!");
     /*
 	gWebSearch = new google.search.WebSearch();
 	gWebSearch.setResultSetSize( google.search.Search.SMALL_RESULTSET );

@@ -8,17 +8,17 @@
 	"homepage_url": "https://github.com/thomasfinch/chromesplosion",
 
 	"icons": {
-		"16": "icon/icon16.png",
-		"48": "icon/icon48.png",
-		"128": "icon/icon128.png"
+		"16": "icons2/icon16.png",
+		"48": "icons2/icon48.png",
+		"128": "icons2/icon128.png"
 	},
 
 	"browser_action": {
 		"default_icon": {
-			"19": "icon/icon19.png",
-			"38": "icon/icon38.png"
+			"19": "icons2/icon19.png",
+			"38": "icons2/icon38.png"
 		},
-        "default_popup": "run.html",
+        //"default_popup": "run.html",
 		"default_title": "Chromesplosion"
 	},
 
@@ -32,7 +32,13 @@
 		"contextMenus",
 		"storage"
 	],
-    "web_accessible_resources": ["script.js"]
+    "web_accessible_resources": ["script.js"],
+
+    "background": {
+        "scripts": ["teststuff.js"]
+    }
+
+
 
     /*
     "content_scripts": [{

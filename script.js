@@ -12,8 +12,8 @@ function init()
 
 	//Create world
 	worldAABB = new b2AABB();
-	worldAABB.minVertex.Set( - 200, - 200 );
-	worldAABB.maxVertex.Set( window.innerWidth + 200, window.innerHeight + 200 );
+	worldAABB.minVertex.Set(0, 0);
+	worldAABB.maxVertex.Set(window.innerWidth+200, window.innerHeight+200);
 	world = new b2World(worldAABB, new b2Vec2(0, -10), true);
 
 	//Create test object

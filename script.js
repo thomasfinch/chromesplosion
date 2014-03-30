@@ -1281,6 +1281,8 @@ if ( location.search != "" ) {
 //
 
 function init() {
+<<<<<<< HEAD
+=======
     /*
 	gWebSearch = new google.search.WebSearch();
 	gWebSearch.setResultSetSize( google.search.Search.SMALL_RESULTSET );
@@ -1290,6 +1292,7 @@ function init() {
 	gImageSearch.setResultSetSize( google.search.Search.SMALL_RESULTSET );
 	gImageSearch.setSearchCompleteCallback( null, onImageSearch );
     */
+>>>>>>> FETCH_HEAD
 
 	document.addEventListener( 'mousedown', onDocumentMouseDown, false );
 	document.addEventListener( 'mouseup', onDocumentMouseUp, false );
@@ -1308,7 +1311,8 @@ function init() {
 
 	worldAABB = new b2AABB();
 	worldAABB.minVertex.Set( - 200, - 200 );
-	worldAABB.maxVertex.Set( window.innerWidth + 200, window.innerHeight + 200 );
+	//worldAABB.maxVertex.Set( window.innerWidth + 200, window.innerHeight + 200 );
+  worldAABB.maxVertex.Set( document.body.offsetWidth-100, document.body.offsetHeight);
 
 	world = new b2World( worldAABB, new b2Vec2( 0, 0 ), true );
 
@@ -1316,8 +1320,6 @@ function init() {
 	setWalls();
 
 	// Get box2d elements
-	// elements = getElementsByClass("box2d");
-
 	var tagsToGet = ['*']; //List of tags to get elements for (physics applied to them)
 	for (var i = 0; i < tagsToGet.length; i++)
 	{
@@ -1326,14 +1328,12 @@ function init() {
 			elements.push(eltsOfTag[j]);
 	}
 
-	console.log(elements);
-
-    for (var i = 0; i < elements.length; i++){
-        if (elements[i].hasChildNodes()){
-            elements.splice(i, 1);
-            console.log("deleted");
-        }
-    }
+    // for (var i = 0; i < elements.length; i++){
+    //     if (elements[i].hasChildNodes()){
+    //         elements.splice(i, 1);
+    //         console.log("deleted");
+    //     }
+    // }
 
 
 	for ( var i = 0; i < elements.length; i ++ ) {
@@ -1349,9 +1349,9 @@ function init() {
 		element.style.left = properties[i][0] + 'px';
 		element.style.top = properties[i][1] + 'px';
 		element.style.width = properties[i][2] + 'px';
-		element.addEventListener( 'mousedown', onElementMouseDown, false );
-		element.addEventListener( 'mouseup', onElementMouseUp, false );
-		element.addEventListener( 'click', onElementClick, false );
+		// element.addEventListener( 'mousedown', onElementMouseDown, false );
+		// element.addEventListener( 'mouseup', onElementMouseUp, false );
+		// element.addEventListener( 'click', onElementClick, false );
 
 		bodies[i] = createBox( world, properties[i][0] + (properties[i][2] >> 1), properties[i][1] + (properties[i][3] >> 1), properties[i][2] / 2, properties[i][3] / 2, false );
 
@@ -1379,8 +1379,49 @@ function run() {
 
 function onDocumentMouseDown( event ) {
 
-	isMouseDown = true;
+	//isMouseDown = true;
 
+  //console.log('dist: '+distToCenter(event.clientX, event.clientY, elements[5]));
+
+  for (var i = 0; i < elements.length; i++)
+  {
+    var dist = distToCenter(event.clientX, event.clientY, elements[i]);
+    if (dist < 100)
+    {
+      var vec = [0,0]; //Unit vector from click point to object center point
+      var eltCenter = rectCenter(elements[i]);
+      vec[0] = eltCenter[0] - event.clientX;
+      vec[1] = eltCenter[1] - event.clientY;
+      var vecLength = unitVector(vec[0], vec[1]);
+      vec[0] /= vecLength; //Make it a unit vector
+      var impulseStrength = 75000;
+      vec[0] *= impulseStrength*10;
+      vec[1] *= impulseStrength/10;
+
+      console.log(vec);
+      bodies[i].ApplyImpulse(new b2Vec2(vec[0], vec[1]), bodies[i].GetCenterPosition());
+      bodies[i].WakeUp();
+    }
+  }
+}
+
+function rectCenter(elt)
+{
+  var rect = elt.getBoundingClientRect();
+  var centerY = Math.abs((rect.bottom+rect.top)/2);
+  var centerX = Math.abs((rect.right+rect.left)/2);
+  return [centerX, centerY];
+}
+
+function unitVector(x, y)
+{
+  return Math.sqrt(Math.pow(x,2)+Math.pow(y,2));
+}
+
+function distToCenter(clickX, clickY, elt)
+{
+  var center = rectCenter(elt);
+  return unitVector(clickX-center[0],clickY-center[1]);
 }
 
 function onDocumentMouseUp( event ) {
@@ -1486,46 +1527,6 @@ function onElementClick( event ) {
 	if ( event.target == document.getElementById( 'q' ) ) document.getElementById('q').focus();
 
 }
-
-// API STUFF
-
-function imFeelingLucky() {
-
-	imFeelingLuckyMode = true;
-	gWebSearch.execute( document.getElementById('q').value );
-
-	return false;
-
-}
-
-function onWebSearch() {
-
-	if ( imFeelingLuckyMode ) {
-
-		location.href = gWebSearch.results[0].unescapedUrl;
-		return;
-
-	}
-
-	for ( var i = 0; i < gWebSearch.results.length; i ++ ) {
-
-		addWeb( gWebSearch.results[i] );
-
-	}
-
-}
-
-function onImageSearch() {
-
-	for ( var i = 0; i < gImageSearch.results.length; i ++ ) {
-
-		addImage( gImageSearch.results[i] );
-
-	}
-
-}
-
-//
 
 function loop() {
 
@@ -1716,47 +1717,31 @@ function getBrowserDimensions() {
 
 	var changed = false;
 
-	if ( stage[0] != window.screenX ) {
+	// if ( stage[0] != window.screenX ) {
 
-		delta[0] = (window.screenX - stage[0]) * 50;
-		stage[0] = window.screenX;
-		changed = true;
-	}
+	// 	delta[0] = (window.screenX - stage[0]) * 50;
+	// 	stage[0] = window.screenX;
+	// 	changed = true;
+	// }
 
-	if ( stage[1] != window.screenY ) {
+	// if ( stage[1] != window.screenY ) {
 
-		delta[1] = (window.screenY - stage[1]) * 50;
-		stage[1] = window.screenY;
-		changed = true;
-	}
+	// 	delta[1] = (window.screenY - stage[1]) * 50;
+	// 	stage[1] = window.screenY;
+	// 	changed = true;
+	// }
 
-	if ( stage[2] != window.innerWidth ) {
+	// if ( stage[2] != window.innerWidth ) {
 
-		stage[2] = window.innerWidth;
-		changed = true;   
-	}
+	// 	stage[2] = window.innerWidth;
+	// 	changed = true;   
+	// }
 
-	if ( stage[3] != window.innerHeight ) {
+	// if ( stage[3] != window.innerHeight ) {
 
-		stage[3] = window.innerHeight;
-		changed = true;
-	}
+	// 	stage[3] = window.innerHeight;
+	// 	changed = true;
+	// }
 
 	return changed;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

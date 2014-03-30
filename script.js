@@ -1302,7 +1302,7 @@ function init() {
 	worldAABB.maxVertex.Set( window.innerWidth + 200, window.innerHeight + 200 );
 	world = new b2World( worldAABB, new b2Vec2( 0, 0 ), true );
 
-	// walls
+	// walls are great
 	setWalls();
 
 	// Get box2d elements

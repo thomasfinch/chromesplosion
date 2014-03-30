@@ -337,6 +337,7 @@ function createBox(world, x, y, width, height, fixed, element) {
 		boxSd.density = 1.0;
 
 	boxSd.extents.Set(width, height);
+	boxSd.friction = 0.5;
 
 	var boxBd = new b2BodyDef();
 	boxBd.AddShape(boxSd);

@@ -1319,7 +1319,7 @@ function init() {
 	// Get box2d elements
 	// elements = getElementsByClass("box2d");
 
-	var tagsToGet = ['div']; //List of tags to get elements for (physics applied to them)
+	var tagsToGet = ['*']; //List of tags to get elements for (physics applied to them)
 	for (var i = 0; i < tagsToGet.length; i++)
 	{
 		var eltsOfTag = document.getElementsByTagName(tagsToGet[i]);
@@ -1328,6 +1328,13 @@ function init() {
 	}
 
 	console.log(elements);
+
+    for (var i = 0; i < elements.length; i++){
+        if (elements[i].hasChildNodes()){
+            elements.splice(i, 1);
+            console.log("deleted");
+        }
+    }
 
 
 	for ( var i = 0; i < elements.length; i ++ ) {

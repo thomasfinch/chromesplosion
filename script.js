@@ -1378,7 +1378,7 @@ function onDocumentMouseDown( event ) {
       vec[1] = eltCenter[1] - event.clientY;
       var vecLength = unitVector(vec[0], vec[1]);
       vec[0] /= vecLength; //Make it a unit vector
-      var impulseStrength = 100000;
+      var impulseStrength = 100*bodies[i].m_mass;
       vec[0] *= impulseStrength*10;
       vec[1] *= impulseStrength/10;
 

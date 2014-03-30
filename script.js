@@ -1307,20 +1307,18 @@ function init() {
 
 	// Get box2d elements
 	var tagsToGet = ['*']; //List of tags to get elements for (physics applied to them)
+  var excluded = ['HTML','TITLE','HEAD','BODY','SCRIPT','STYLE'];
 	for (var i = 0; i < tagsToGet.length; i++)
 	{
 		var eltsOfTag = document.getElementsByTagName(tagsToGet[i]);
 		for (var j = 0; j < eltsOfTag.length; j++)
-			elements.push(eltsOfTag[j]);
+    {
+      if (excluded.indexOf(eltsOfTag[j].tagName) == -1)
+      {
+  			elements.push(eltsOfTag[j]);
+      }
+    }
 	}
-
-    // for (var i = 0; i < elements.length; i++){
-    //     if (elements[i].hasChildNodes()){
-    //         elements.splice(i, 1);
-    //         console.log("deleted");
-    //     }
-    // }
-
 
 	for ( var i = 0; i < elements.length; i ++ ) {
 
@@ -1381,13 +1379,11 @@ function onDocumentMouseDown( event ) {
       var vecLength = unitVector(vec[0], vec[1]);
       vec[0] /= vecLength; //Make it a unit vector
       var impulseStrength = 100000;
-      // vec[0] *= impulseStrength*10;
-      // vec[1] *= impulseStrength/10;
-      vec[0] *= impulseStrength;
-      vec[1] *= impulseStrength;
+      vec[0] *= impulseStrength*10;
+      vec[1] *= impulseStrength/10;
 
       console.log(vec);
-      bodies[i].ApplyImpulse(new b2Vec2(1000000, 1000000), bodies[i].GetCenterPosition());
+      bodies[i].ApplyImpulse(new b2Vec2(vec[0], vec[1]), bodies[i].GetCenterPosition());
       bodies[i].WakeUp();
     }
   }

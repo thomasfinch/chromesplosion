@@ -1281,18 +1281,6 @@ if ( location.search != "" ) {
 //
 
 function init() {
-<<<<<<< HEAD
-=======
-    /*
-	gWebSearch = new google.search.WebSearch();
-	gWebSearch.setResultSetSize( google.search.Search.SMALL_RESULTSET );
-	gWebSearch.setSearchCompleteCallback( null, onWebSearch );
-
-	gImageSearch = new google.search.ImageSearch();
-	gImageSearch.setResultSetSize( google.search.Search.SMALL_RESULTSET );
-	gImageSearch.setSearchCompleteCallback( null, onImageSearch );
-    */
->>>>>>> FETCH_HEAD
 
 	document.addEventListener( 'mousedown', onDocumentMouseDown, false );
 	document.addEventListener( 'mouseup', onDocumentMouseUp, false );
@@ -1310,10 +1298,8 @@ function init() {
 	// init box2d
 
 	worldAABB = new b2AABB();
-	worldAABB.minVertex.Set( - 200, - 200 );
-	//worldAABB.maxVertex.Set( window.innerWidth + 200, window.innerHeight + 200 );
-  worldAABB.maxVertex.Set( document.body.offsetWidth-100, document.body.offsetHeight);
-
+	worldAABB.minVertex.Set(-200, -200);
+	worldAABB.maxVertex.Set( window.innerWidth + 200, window.innerHeight + 200 );
 	world = new b2World( worldAABB, new b2Vec2( 0, 0 ), true );
 
 	// walls
@@ -1394,12 +1380,14 @@ function onDocumentMouseDown( event ) {
       vec[1] = eltCenter[1] - event.clientY;
       var vecLength = unitVector(vec[0], vec[1]);
       vec[0] /= vecLength; //Make it a unit vector
-      var impulseStrength = 75000;
-      vec[0] *= impulseStrength*10;
-      vec[1] *= impulseStrength/10;
+      var impulseStrength = 100000;
+      // vec[0] *= impulseStrength*10;
+      // vec[1] *= impulseStrength/10;
+      vec[0] *= impulseStrength;
+      vec[1] *= impulseStrength;
 
       console.log(vec);
-      bodies[i].ApplyImpulse(new b2Vec2(vec[0], vec[1]), bodies[i].GetCenterPosition());
+      bodies[i].ApplyImpulse(new b2Vec2(1000000, 1000000), bodies[i].GetCenterPosition());
       bodies[i].WakeUp();
     }
   }

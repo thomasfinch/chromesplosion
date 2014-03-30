@@ -1261,6 +1261,7 @@ var gravity = {x: 0, y: 0 };
 
 init();
 
+/*
 if ( location.search != "" ) {
 
 	var params = location.search.substr(1).split("&")
@@ -1277,6 +1278,7 @@ if ( location.search != "" ) {
 		}
 	}
 }
+*/
 
 //
 
@@ -1306,8 +1308,86 @@ function init() {
 	setWalls();
 
 	// Get box2d elements
+
+    //$("html").css("overflow", "hidden");
+    //$("body").css("overflow", "hidden");
+        
+        
+    $("img").each(function() {
+            if($(this).children().length < 1) {
+                        $(this).addClass("box2d");
+                                $(this).css("zIndex", "99");
+                                        }
+    }); 
+
+    $("div").each(function() {
+            if($(this).children().length < 1) {
+                        $(this).addClass("box2d");
+                                $(this).css("position", "relative");
+                                        $(this).css("zIndex", "99");
+                                            }
+    }); 
+
+    $("span").each(function() {
+            if($(this).children().length < 1) {
+                        $(this).addClass("box2d");
+                                $(this).css("position", "relative");
+                                        $(this).css("zIndex", "99");
+                                            }
+    }); 
+
+    $("a").each(function() {
+            if($(this).children().length < 1) {
+                        $(this).addClass("box2d");
+                                $(this).css("position", "relative");
+                                        $(this).css("zIndex", "99");
+                                            }
+    }); 
+
+    $("li").each(function() {
+            if($(this).children().length < 1) {
+                        $(this).addClass("box2d");
+                                $(this).css("position", "relative");
+                                        $(this).css("zIndex", "99");
+                                            }
+    }); 
+
+    $("ol").each(function() {
+            if($(this).children().length < 1) {
+                        $(this).addClass("box2d");
+                                $(this).css("position", "relative");
+                                        $(this).css("zIndex", "99");
+                                            }
+    }); 
+
+
+    $("p, b, em, code").each(function() {
+            if($(this).children().length < 1) {
+                        $(this).addClass("box2d");
+                                $(this).css("position", "relative");
+                                        $(this).css("zIndex", "99");
+                                            }
+    }); 
+
+    $("embed").each(function() {
+            if($(this).children().length < 1) {
+                        $(this).addClass("box2d");
+                                $(this).css("position", "relative");
+                                        $(this).css("zIndex", "99");
+                                            }
+    });
+
+    $("h1, h2, h3, h4, h5, h6").each(function() {
+        if($(this).children().length < 1){
+            $(this).addClass("box2d");
+            $(this).css("position", "relative");
+            $(this).css("zIndex", "99");
+        }
+    });
+
+    /*
 	var tagsToGet = ['*']; //List of tags to get elements for (physics applied to them)
-  var excluded = ['HTML','TITLE','HEAD','BODY','SCRIPT','STYLE'];
+    var excluded = ['HTML','TITLE','HEAD','BODY','SCRIPT','STYLE'];
 	for (var i = 0; i < tagsToGet.length; i++)
 	{
 		var eltsOfTag = document.getElementsByTagName(tagsToGet[i]);
@@ -1319,23 +1399,24 @@ function init() {
       }
     }
 	}
-
+    */
+    elements = document.getElementsByClassName('box2d');
+    console.log(elements);
 	for ( var i = 0; i < elements.length; i ++ ) {
 
 		properties[i] = getElementProperties( elements[i] );
 
 	}
-
 	for ( var i = 0; i < elements.length; i ++ ) {
-
 		var element = elements[ i ];
-		element.style.position = 'absolute';
+		//element.style.position = 'relative';
 		element.style.left = properties[i][0] + 'px';
 		element.style.top = properties[i][1] + 'px';
 		element.style.width = properties[i][2] + 'px';
 		// element.addEventListener( 'mousedown', onElementMouseDown, false );
 		// element.addEventListener( 'mouseup', onElementMouseUp, false );
 		// element.addEventListener( 'click', onElementClick, false );
+        // */
 
 		bodies[i] = createBox( world, properties[i][0] + (properties[i][2] >> 1), properties[i][1] + (properties[i][3] >> 1), properties[i][2] / 2, properties[i][3] / 2, false );
 
@@ -1480,6 +1561,7 @@ function onWindowDeviceOrientation( event ) {
 
 //
 
+/*
 function onElementMouseDown( event ) {
 
 	event.preventDefault();
@@ -1494,6 +1576,7 @@ function onElementMouseUp( event ) {
 	event.preventDefault();
 
 }
+
 
 function onElementClick( event ) {
 
@@ -1511,6 +1594,7 @@ function onElementClick( event ) {
 	if ( event.target == document.getElementById( 'q' ) ) document.getElementById('q').focus();
 
 }
+*/
 
 function loop() {
 

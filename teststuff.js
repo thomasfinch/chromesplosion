@@ -25,6 +25,7 @@ var stat = false;
 function toggle(tab){
     if (!stat){
         chrome.browserAction.setIcon({"path" : chrome.extension.getURL("icon/icon38.png")});
+        chrome.tabs.executeScript(null, {file: "jquery-1.11.0.min.js"});
         chrome.tabs.executeScript(null, {file: "script.js"});
         stat = !stat;
     }

@@ -87,8 +87,18 @@ function init() {
 	setWalls();
 
 	// Get box2d elements
+	// elements = getElementsByClass("box2d");
 
-	elements = getElementsByClass("box2d");
+	var tagsToGet = ['h1']; //List of tags to get elements for (physics applied to them)
+	for (var i = 0; i < tagsToGet.length; i++)
+	{
+		var eltsOfTag = document.getElementsByTagName(tagsToGet[i]);
+		for (var j = 0; j < eltsOfTag.length; j++)
+			elements.push(eltsOfTag[j]);
+	}
+
+	console.log(elements);
+
 
 	for ( var i = 0; i < elements.length; i ++ ) {
 
